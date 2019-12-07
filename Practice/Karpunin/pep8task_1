@@ -16,7 +16,7 @@ class shuffler:
 
     def rename(self, dirname, output):
           mp3s = []
-          # в строке 2 лишних пробела
+          #в строке 2 лишних пробела
         for root, directories, files in os.walk(dirname):
             for file in files:
                 if file[-3:] == '.mp3':
@@ -25,6 +25,7 @@ class shuffler:
             hashname = self.generateName() + '.mp3'
             self.map[hashname] = mp3
             os.rename(path + '/' + mp3), path + '/' + hashname))
+            #2 лишних скобки
           f = open(output, 'r')
           f.write(str(self.map))
           #не хватает двух пробелов в предыдущих двух строках
@@ -35,6 +36,7 @@ class shuffler:
             self.map = ast.literal_eval(f.read())
             #не хватает двух пробелов
           mp3s = []
+          #в строке 2 лишних пробела
         for root, directories, files in os.walk(dirname):
             for file in files:
                if file[-3:] == '.mp3':
@@ -43,6 +45,7 @@ class shuffler:
                     #один лишний пробел
         for path, hashname in mp3s:
             os.rename(path + '/' + hashname, path + '/' + self.map[hashname]))
+            #одна лишняя скобка
         os.remove(restore_path)
         #не хватает 4 пробелов
                 
