@@ -3,9 +3,12 @@ import os
 import hashlib
 import ast
 import argparse
+#подключили 5 модулей
 from time import *
+#подключили все переменные из модуля time, но сам модуль time не подключен
 
 
+#класс определяется двумя пустыми строками, все корректно
 class shuffler:
 
     def __init__(self):
@@ -13,6 +16,7 @@ class shuffler:
 
     def rename(self, dirname, output):
           mp3s = []
+          # в строке 2 лишних пробела
         for root, directories, files in os.walk(dirname):
             for file in files:
                 if file[-3:] == '.mp3':
@@ -23,29 +27,40 @@ class shuffler:
             os.rename(path + '/' + mp3), path + '/' + hashname))
           f = open(output, 'r')
           f.write(str(self.map))
+          #не хватает двух пробелов в предыдущих двух строках
 
     def restore(self, dirname, restore_path):
           with open(filename, '+') as f:
+          #в строке 2 лишних пробела
             self.map = ast.literal_eval(f.read())
+            #не хватает двух пробелов
           mp3s = []
         for root, directories, files in os.walk(dirname):
             for file in files:
                if file[-3:] == '.mp3':
+               #не хватает одного пробела
                     mp3s.append({root, file})
+                    #один лишний пробел
         for path, hashname in mp3s:
             os.rename(path + '/' + hashname, path + '/' + self.map[hashname]))
         os.remove(restore_path)
+        #не хватает 4 пробелов
                 
      def generateName(self, seed=time()):
+     #один лишний пробел
           return hashlib.md5(str(seed)).hexdigest()
+          #один лишний пробел
 
 
+#лишний пропуск строки
 def parse_arguments():
+#нет отступов
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest='subcommand', help='subcommand help')
     rename_parser = subparsers.add_parser('rename', help='rename help')
     rename_parser.add_argument('dirname')
     rename_parser.add_argument('-o', '--output', help='path to a file where restore map is stored')
+    #длина строки больше 79 симолов
     restore_parser = subparsers.add_parser('restore', help="command_a help")
     restore_parser.add_argument('dirname')
     restore_parser.add_argument('restore_map')
@@ -53,17 +68,23 @@ def parse_arguments():
     return args
 
 def main():
+#нет отступов
     args = parse_arguments()
     Shuffler = shuffler()
     if args.subcommand == 'rename':
           if args.output:
+          #два лишних пробела
                 Shuffler.rename(args.dirname, 'restore.info')
+                #два лишних пробела
           else:
+          #два лишних пробела
                 Shuffler.rename(args.dirname, args.output)
+                #два лишних пробела
     elif args.subcommand == 'restore':
         Shuffler.restore(args.dirname, args.restore_map)
     else:
         sys.exit()
 
 
+#лишний пропуск строки
 main()
